@@ -15,25 +15,6 @@ if(isset($_GET['delete_id'])) {
         echo "Xóa nhân viên thất bại: " . $mysqli->error;
     }
 }
-
-if(isset($_POST['submit_edit'])) {
-    $ma_nv_edit = $_POST['ma_nv_edit'];
-    $ten_nv_edit = $_POST['ten_nv_edit'];
-    $phai_edit = $_POST['phai_edit'];
-    $noi_sinh_edit = $_POST['noi_sinh_edit'];
-    $luong_edit = $_POST['luong_edit'];
-    $ma_phong_edit = $_POST['ma_phong_edit'];
-    
-    $query_edit = "UPDATE nhanvien SET Ten_NV = '$ten_nv_edit', Phai = '$phai_edit', Noi_Sinh = '$noi_sinh_edit', 
-                   Luong = '$luong_edit', Ma_Phong = '$ma_phong_edit' WHERE Ma_NV = '$ma_nv_edit'";
-    
-    $result_edit = $mysqli->query($query_edit);
-    if($result_edit) {
-        echo "Cập nhật thông tin nhân viên thành công!";
-    } else {
-        echo "Cập nhật thông tin nhân viên thất bại: " . $mysqli->error;
-    }
-}
 ?>
 
 <!DOCTYPE html>

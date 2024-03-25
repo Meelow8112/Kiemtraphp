@@ -7,38 +7,31 @@ $dbname = "ql_nhansu";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Kiểm tra kết nối
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Xử lý thông tin đăng nhập
 session_start();
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Truy vấn để kiểm tra thông tin đăng nhập
     $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Đăng nhập thành công
         $_SESSION['username'] = $username;
 
-        // Kiểm tra vai trò của người dùng
         $row = $result->fetch_assoc();
         $role = $row['role'];
 
         if($role == 'admin') {
-            // Chuyển hướng đến trang quản lý nhân viên nếu là admin
             header("Location: admin.php");
             exit();
         } else {
             header("Location: index.php");
         }
     } else {
-        // Đăng nhập thất bại
         echo "Tên người dùng hoặc mật khẩu không đúng.";
     }
 }
